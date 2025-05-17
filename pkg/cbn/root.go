@@ -6,8 +6,8 @@ package cbn
 import (
 	"os"
 
-	"github.com/egel/cbn/v2/pkg/display"
-	"github.com/egel/cbn/v2/pkg/git"
+	"github.com/egel/cbn/pkg/display"
+	"github.com/egel/cbn/pkg/git"
 	"github.com/spf13/cobra"
 )
 

@@ -12,7 +12,7 @@ install:
 .PHONY: build
 build:
 	# build for current platform
-	go build -o ${BINARY_DIR}/${BINARY_NAME} main.go
+	go build -o ${BINARY_DIR}/${BINARY_NAME} ${CBN_DIR}/main.go
 
 .PHONY: build_all
 build_all:
@@ -26,6 +26,11 @@ build_all:
 .PHONY: run
 run:
 	./${BINARY_DIR}/${BINARY_NAME}
+
+clean:
+	go clean -cache
+	go clean -modcache
+	go clean -testcache
 
 # build and run server (with some useful cleanup/format commands to always
 # keep code clean)
