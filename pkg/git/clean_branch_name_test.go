@@ -57,7 +57,7 @@ func TestCleanBranchName(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		result := CleanBranchName(test.original)
+		result := CleanBranchName(test.original, "-", false, false)
 		assert.Equal(t, test.expect, result)
 	}
 }

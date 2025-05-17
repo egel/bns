@@ -8,8 +8,15 @@ import (
 
 	"github.com/egel/cbn/pkg/display"
 	"github.com/egel/cbn/pkg/git"
+	"github.com/egel/cbn/pkg/text"
 	"github.com/spf13/cobra"
 )
+
+var version = "0.1.0"
+
+var flagOriginalCase bool
+var flagForceAscii bool
+var flagConnector string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -19,7 +26,7 @@ var rootCmd = &cobra.Command{
 Tool that take the inputs and convert it into a clean and friendly name.`,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		result := git.CleanBranchName(args)
+		result := git.CleanBranchName(args, flagConnector, flagOriginalCase, flagForceAscii)
 		display.ShowResults(args, result)
 	},
 }
@@ -31,4 +38,9 @@ func Execute() {
 	}
 }
 
-func init() {}
+func init() {
+	rootCmd.PersistentFlags().BoolVarP(&flagOriginalCase, "original-case", "o", false, "keep orginal text case")
+	rootCmd.PersistentFlags().BoolVarP(&flagForceAscii, "force-ascii", "f", false, "force text convert to ASCII")
+	rootCmd.PersistentFlags().StringVarP(&flagConnector, "connector", "c", text.DefaultConnectorChar, "change default strings connector")
+
+}
