@@ -25,6 +25,12 @@ func TestCleanBranchName(t *testing.T) {
 			expect:   "zazolc-gesla-jazn",
 		},
 
+		// Czech panagram
+		{
+			original: []string{"Příliš žluťoučký kůň úpěl ďábelské ódy"},
+			expect: "prilis-zlutoucky-kun-upel-dabelske-ody",
+		},
+
 		// Funky panagram
 		{
 			original: []string{"Tĥïŝ ĩš â fůňķŷ Šťŕĭńġ"},
