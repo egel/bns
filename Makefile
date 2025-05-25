@@ -37,3 +37,6 @@ clean:
 .PHONY: build_and_run
 build_and_run: build run
 
+.PHONY: test
+test:
+	go test ./...
