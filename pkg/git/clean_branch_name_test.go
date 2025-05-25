@@ -28,7 +28,13 @@ func TestCleanBranchName(t *testing.T) {
 		// Czech panagram
 		{
 			original: []string{"Příliš žluťoučký kůň úpěl ďábelské ódy"},
-			expect: "prilis-zlutoucky-kun-upel-dabelske-ody",
+			expect:   "prilis-zlutoucky-kun-upel-dabelske-ody",
+		},
+
+		// French panagram
+		{
+			original: []string{"Dès Noël où un zéphyr haï me vêt de glaçons würmiens je dîne d’exquis rôtis de bœuf au kir à l’aÿ d’âge mûr & cætera"},
+			expect:   "des-noel-ou-un-zephyr-hai-me-vet-de-glacons-wuermiens-je-dine-d-exquis-rotis-de-boeuf-au-kir-a-l-ay-d-age-mur-and-caetera",
 		},
 
 		// Funky panagram

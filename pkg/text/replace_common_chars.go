@@ -13,6 +13,10 @@ var knownCharsMapping [][]string = [][]string{
 	{"ö", "oe"},
 	{"ß", "ss"},
 
+	// French
+	{"œ", "oe"},
+	{"æ", "ae"},
+
 	// Polish
 	{"ł", "l"},
 }
