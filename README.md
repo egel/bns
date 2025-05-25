@@ -1,33 +1,33 @@
-# cbn
+# Branch Name Sanitizer
 
-Clean Branch Name - simple program that remove unwanted characters from given text that can be savly used within git branch.
+Branch Name Sanitizer - simple program that savely cleans text inputs focusing on comply with [Git repository naming conventions][weblink-git-scm-check-ref-format].
 
 ## Features
 
-- Gently clean unwanted characters from given strings
+- Gently clean all characters accents from given input
+- Persist characters meaning conversion, e.g. `ö` => `ou`, `&` => `-and-`
+- Customization of strings connector,
 - Option to allow only ASCII characters
 - Option to keep original case
-- Customization of a string connector
-- Limit output characters
 
 ## Install
 
 ```sh
-go install github.com/egel/cbn/cmd/cbn@latest
+go install github.com/egel/bns/cmd/bns@latest
 ```
 
 ### Git configuration
 
-Add new gitconfig alias e.g.: `cob` (acronym of `checkout -b`) or `brn` (branch new), but you can use anything suite you.
+Add new gitconfig alias name e.g.: `cob` (acronym of `checkout -b`), `brn` (branch new), or anything else that suite your preferences.
 
 ```
 # file ~/.gitconfig
 
 [alias]
-	cob = !sh -c 'git checkout -b $(cbn $@)' -
+	cob = !sh -c 'git checkout -b $(bns $@)' -
 ```
 
-then you can use it like following and automatically checkout to clean branch
+then you can automatically checkout to a new, clean branch using like following
 
 ```sh
 git cob "fancy name of your new branch"
@@ -35,36 +35,48 @@ git cob "fancy name of your new branch"
 
 ## Usage
 
-### Gently clean text
+### Default
 
 ```sh
-cbn "Am I new best feature?" # => am-i-new-best-feature
+bns "Introduce new dashboard UI" # => introduce-new-dashboard-ui
+```
+
+### Customize string connector
+
+```sh
+bns -c "_" "Develop AI-powered bug reporter" # => develop_ai_powered_bug_reporter
 ```
 
 ### Keep original case
 
+flag: `-o`, `--original-case`
+
 ```sh
-cbn -o "Task: Implement Login Feature" # => Task-Implement-Login-Feature
+bns -o "Task: Implement Login Feature" # => Task-Implement-Login-Feature
 ```
 
 ### Completly remove all Non-ASCII chars
 
+flag: `-f`, `--force-ascii`.
+
+If you need a strict non-ASCII complience.
+
 ```sh
 # Arabic
-cbn -f "تحسين: amélioration du dashboard de l'utilisateur" # => amlioration-du-dashboard-de-l-utilisateur
+bns -f "تحسين: amélioration du dashboard de l'utilisateur" # => amlioration-du-dashboard-de-l-utilisateur
 
 # Chinese (mandarin)
-cbn -f "BUG：搜索功能不工作" # => bug
+bns -f "BUG：搜索功能不工作" # => bug
 ```
 
 ### Allow multiple string arguments
 
 > [!NOTE]
-> While using with multiple strings arguments, pay attention as without quotes, some arguments may be understood as flags and trigger option command instead of desired output.
+> When passing multiple strings as arguments to your tool, make sure to enclose each one in quotes to ensure they are treated as input values rather than flags or options.
 
 ```sh
 # hey! I also works as arg list!
-cbn This is fancy feature!  # => this-is-fancy-feature
+bns This is fancy new feature!  # => this-is-fancy-new-feature
 ```
 
 ## Upgrade
@@ -72,7 +84,7 @@ cbn This is fancy feature!  # => this-is-fancy-feature
 To upgrade to the latest version use:
 
 ```sh
-GONOPROXY=github.com/egel go install github.com/egel/cbn/cmd/cbn@latest
+GONOPROXY=github.com/egel go install github.com/egel/bns/cmd/bns@latest
 ```
 
 ## Uninstall
@@ -80,7 +92,7 @@ GONOPROXY=github.com/egel go install github.com/egel/cbn/cmd/cbn@latest
 1.  remove the binary from system
 
     ```sh
-    rm $(command -v cbn)
+    rm $(command -v bns)
     ```
 
 1.  remove the alias from your `~/.gitconfig`
@@ -88,3 +100,5 @@ GONOPROXY=github.com/egel go install github.com/egel/cbn/cmd/cbn@latest
 ## License
 
 Apache-2.0 license
+
+[weblink-git-scm-check-ref-format]: https://git-scm.com/docs/git-check-ref-format
