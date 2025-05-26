@@ -1,6 +1,6 @@
-BINARY_NAME=cbn
-BINARY_DIR=bin/cbn
-CBN_DIR=cmd/cbn
+BINARY_NAME=bns
+BINARY_DIR=bin/bns
+BNS_DIR=cmd/bns
 
 # change default shell (for using source)
 SHELL := /bin/bash
@@ -12,7 +12,7 @@ install:
 .PHONY: build
 build:
 	# build for current platform
-	go build -o ${BINARY_DIR}/${BINARY_NAME} ${CBN_DIR}/main.go
+	go build -o ${BINARY_DIR}/${BINARY_NAME} ${BNS_DIR}/main.go
 
 .PHONY: build_all
 build_all:

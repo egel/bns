@@ -1,4 +1,4 @@
-module github.com/egel/cbn
+module github.com/egel/bns
 
 go 1.23.3
 

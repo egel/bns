@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/egel/cbn/pkg/text"
+	"github.com/egel/bns/pkg/text"
 )
 
 // Clean the given list of arguments/strings from unwanted or unprintable chars
