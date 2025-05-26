@@ -31,6 +31,13 @@ var charsForbiddenInBranchName = []string{
 	"+",
 	"=",
 	"|",
+	"#",
+	// custom
+	"—", // em dash
+	"…",
+	// & is special char, see ReplaceCommonChars
+	"•",
+	"：",
 }
 
 var charsAllowedInBranchName = []string{

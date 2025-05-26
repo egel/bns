@@ -3,6 +3,7 @@ package git
 import (
 	"testing"
 
+	"github.com/egel/bns/pkg/text"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -70,6 +71,69 @@ func TestCleanBranchName(t *testing.T) {
 
 	for _, test := range tests {
 		result := CleanBranchName(test.original, "-", false, false)
+		assert.Equal(t, test.expect, result)
+	}
+}
+
+func Test_CleanBranchName_WithCustomConnector(t *testing.T) {
+	type testStrings struct {
+		original []string
+		expect   string
+	}
+
+	var tests = []testStrings{
+		{
+			original: []string{"Develop AI-powered bug reporter"},
+			expect:   "develop_ai_powered_bug_reporter",
+		},
+	}
+
+	for _, test := range tests {
+		result := CleanBranchName(test.original, "_", false, false)
+		assert.Equal(t, test.expect, result)
+	}
+}
+
+func Test_CleanBranchName_WithKeepCase(t *testing.T) {
+	type testStrings struct {
+		original []string
+		expect   string
+	}
+
+	var tests = []testStrings{
+		{
+			original: []string{"ISS-1234: Develop AI-powered bug reporter"},
+			expect:   "ISS-1234-Develop-AI-powered-bug-reporter",
+		},
+	}
+
+	for _, test := range tests {
+		result := CleanBranchName(test.original, text.DefaultConnectorChar, true, false)
+		assert.Equal(t, test.expect, result)
+	}
+}
+
+func Test_CleanBranchName_WithForceAscii(t *testing.T) {
+	type testStrings struct {
+		original []string
+		expect   string
+	}
+
+	var tests = []testStrings{
+		// Chinese (Mandarian)
+		{
+			original: []string{"BUG：login功能缺陷"},
+			expect:   "bug-login",
+		},
+		// Arabic
+		{
+			original: []string{"مشكلة: غيابية في fonctionnalité d'inscription"},
+			expect:   "fonctionnalit-d-inscription",
+		},
+	}
+
+	for _, test := range tests {
+		result := CleanBranchName(test.original, text.DefaultConnectorChar, false, true)
 		assert.Equal(t, test.expect, result)
 	}
 }
