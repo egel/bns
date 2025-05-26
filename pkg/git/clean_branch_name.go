@@ -2,7 +2,6 @@ package git
 
 import (
 	"bytes"
-	"fmt"
 	"strings"
 
 	"github.com/egel/bns/pkg/text"
@@ -15,8 +14,6 @@ func CleanBranchName(
 	keepOriginalCase bool,
 	forceAscii bool,
 ) string {
-	fmt.Println(inputs, connectorChar, keepOriginalCase, forceAscii)
-
 	oneBuf := new(bytes.Buffer)
 	for i, v := range inputs {
 		tmp := v
