@@ -4,9 +4,9 @@ Branch Name Sanitizer - simple program that savely cleans text inputs focusing o
 
 ## Features
 
-- Gently clean all characters accents from given input
-- Persist characters meaning conversion, e.g. `ö` => `ou`, `&` => `-and-`
-- Customization of strings connector,
+- Gently clean all accent characters from input, e.g: `é` => `e`, `ă` => `a`, etc.
+- Persist characters meaning conversion, e.g. `ö` => `ou`, `&` => `-and-`, etc.
+- Customization of strings connector
 - Option to allow only ASCII characters
 - Option to keep original case
 
@@ -27,7 +27,7 @@ Add new gitconfig alias name e.g.: `cob` (acronym of `checkout -b`), `brn` (bran
 	cob = !sh -c 'git checkout -b $(bns $@)' -
 ```
 
-then you can automatically checkout to a new, clean branch using like following
+then you can automatically checkout to a new, clean branch using command like following:
 
 ```sh
 git cob "fancy name of your new branch"
@@ -42,6 +42,8 @@ bns "Introduce new dashboard UI" # => introduce-new-dashboard-ui
 ```
 
 ### Customize string connector
+
+flag: `-c`, `--connector`
 
 ```sh
 bns -c "_" "Develop AI-powered bug reporter" # => develop_ai_powered_bug_reporter
