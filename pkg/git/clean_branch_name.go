@@ -34,6 +34,7 @@ func CleanBranchName(
 		} else {
 			tmp = text.CleanAccentChars(tmp)
 		}
+		tmp = trimAllowedChars(tmp)
 		if i == 0 {
 			oneBuf.WriteString(tmp)
 		} else {
